@@ -15,9 +15,6 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D rb;         //Store the rigidbody of an object
 
-    public int maxHealth;
-    public int currentHealth;
-
     public Transform startPos;
     public Transform currentPos;
 
@@ -27,9 +24,6 @@ public class PlayerMovement : MonoBehaviour
         speed = 10f;
         jump = 400f;
         rb = GetComponent<Rigidbody2D>();      //Get the rigidbody of the object
-
-        maxHealth = 2;
-        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -50,22 +44,6 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
-        }
-
-        if (other.gameObject.CompareTag("Respawn"))
-        {
-            TakeDamage(1);
-        }
-    }
-
-    void TakeDamage(int amount)
-    {
-        currentHealth -= amount;
-        transform.position = new Vector2(startPos.position.x, startPos.position.y);
-
-        if (currentHealth <= 0)
-        {
-            SceneManager.LoadScene("GameOver");
         }
     }
 }
