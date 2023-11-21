@@ -24,11 +24,18 @@ public class Enemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (left)
+        distance = Vector2.Distance(transform.position, target.transform.position);
+        Vector2 direction = target.transform.position;
+
+        if (distance < 10)
+        {
+            transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, spawnpoint);
+        }
+        //if (left)
         {
             transform.position = new Vector2(transform.position.x - speed, transform.position.y);
         }
-        else
+        //else
         {
             transform.position = new Vector2(transform.position.x + speed, transform.position.y);
         }
@@ -39,6 +46,7 @@ public class Enemies : MonoBehaviour
         if (coll.tag == "Player")
         {
             damage.TakeDamage(1);
+            Destroy(gameObject);
         }
         if (coll.tag == "Wall" && left == true)
         {
