@@ -5,10 +5,6 @@ using UnityEngine;
 public class Enemies : MonoBehaviour
 {
     //Variables
-    Health damage;
-
-    public GameObject hitPoints;
-
     public float speed;
 
     public bool left = true;
@@ -17,25 +13,17 @@ public class Enemies : MonoBehaviour
     void Start()
     {
         left = true;
-        damage = hitPoints.GetComponent<Health>();
         speed = 0.015f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        distance = Vector2.Distance(transform.position, target.transform.position);
-        Vector2 direction = target.transform.position;
-
-        if (distance < 10)
-        {
-            transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, spawnpoint);
-        }
-        //if (left)
+        if (left)
         {
             transform.position = new Vector2(transform.position.x - speed, transform.position.y);
         }
-        //else
+        else
         {
             transform.position = new Vector2(transform.position.x + speed, transform.position.y);
         }
@@ -45,17 +33,15 @@ public class Enemies : MonoBehaviour
     {
         if (coll.tag == "Player")
         {
-            damage.TakeDamage(1);
+            Debug.Log("Hit");
             Destroy(gameObject);
         }
         if (coll.tag == "Wall" && left == true)
         {
-            Debug.Log("hit");
             left = false;
         }
         else if (coll.tag == "Wall" && left == false)
         {
-            Debug.Log("hit");
             left = true;
         }
     }

@@ -21,7 +21,16 @@ public class GOAL : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            TeleportPlayer();
+            
             SceneManager.LoadScene("Level 2");
         }
+    }
+
+    private void TeleportPlayer()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        player.transform.position = new Vector3(0f, 1f, 0f); // Adjust the position accordingly
     }
 }
