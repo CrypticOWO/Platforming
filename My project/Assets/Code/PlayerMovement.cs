@@ -18,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
 
-    //public GameObject hp1;
-    //public GameObject hp2;
+    public GameObject hp1;
+    public GameObject hp2;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
         currentHealth = maxHealth;
         PlayerPrefs.SetInt("Health", currentHealth);
         PlayerPrefs.Save();
+        hp1.SetActive(true);
+        hp2.SetActive(true);
     }
 
     // Update is called once per frame
@@ -64,13 +66,13 @@ public class PlayerMovement : MonoBehaviour
         PlayerPrefs.SetInt("Health", currentHealth);
         PlayerPrefs.Save();
 
-        //if (currentHealth == 2)
+        if (currentHealth == 2)
         {
-            //hp1.SetActive(false);
+            hp1.SetActive(false);
         }
-        //if (currentHealth == 1)
+        if (currentHealth == 1)
         {
-            //hp2.SetActive(false);
+            hp2.SetActive(false);
         }
         if (currentHealth == 0)
         {
