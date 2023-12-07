@@ -5,40 +5,40 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     // Variables
-    public GameObject Player;
-    private GameObject InstantPlayer;
+    public GameObject player;
+    private GameObject instantPlayer;
 
     public GameObject hp1;
-    private GameObject instanthp1;
+    private GameObject instantHp1;
 
     public GameObject hp2;
-    private GameObject instanthp2;
+    private GameObject instantHp2;
 
     void Awake()
     {
-        InstantPlayer = Instantiate(Player, new Vector3(-6.5f, -3.5f, 0), Player.transform.rotation);
+        instantPlayer = Instantiate(player, new Vector3(-6.5f, -3.5f, 0), player.transform.rotation);
 
-        instanthp1 = Instantiate(hp1, new Vector3(-6.5f, 0f, 0), hp1.transform.rotation);
-        instanthp2 = Instantiate(hp2, new Vector3(-4.5f, 0f, 0), hp2.transform.rotation);
+        instantHp1 = Instantiate(hp1, new Vector3(0, 0, 0), hp1.transform.rotation);
+        instantHp2 = Instantiate(hp2, new Vector3(0, 0, 0), hp2.transform.rotation);
+    }
 
-        instanthp1.SetActive(true);
-        hp2.SetActive(true);
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position = new Vector3(instantPlayer.transform.position.x, transform.position.y, -10);
+        instantHp1.transform.position = new Vector3(instantPlayer.transform.position.x - 6.75f, transform.position.y + 4 , 0);
+        instantHp2.transform.position = new Vector3(instantPlayer.transform.position.x - 8.0f, transform.position.y + 4, 0);
 
         int currentHealth = PlayerPrefs.GetInt("Health");
 
         if (currentHealth == 2)
         {
-            hp1.SetActive(false);
+            instantHp1.SetActive(false);
         }
-        if (currentHealth == 1)
+        else if (currentHealth == 1)
         {
-            hp2.SetActive(false);
+            instantHp2.SetActive(false);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        transform.position = new Vector3(InstantPlayer.transform.position.x, transform.position.y, -10);
     }
 }

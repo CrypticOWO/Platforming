@@ -21,18 +21,35 @@ public class PlayerMovement : MonoBehaviour
     public GameObject hp1;
     public GameObject hp2;
 
+    public int targetSceneBuildIndex = 1;
+
+    public static PlayerMovement instance;
+
+    void Awake()
+    {
+        // Check if the current scene is the target scene
+        if (IsInTargetScene())
+        {
+            Debug.Log("Hello");
+        }
+        else   
+        {
+            Debug.Log("Fuck you");
+            hp1.SetActive(true);
+            hp2.SetActive(true);
+            maxHealth = 3;
+            ResetPlayerHealth();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         speed = 10f;
         jump = 400f;
         rb = GetComponent<Rigidbody2D>();      // Get the rigidbody of the object
-        maxHealth = 3;
-        currentHealth = maxHealth;
-        PlayerPrefs.SetInt("Health", currentHealth);
-        PlayerPrefs.Save();
-        hp1.SetActive(true);
-        hp2.SetActive(true);
+        //maxHealth = 3;
+        LoadPlayerHealth();
     }
 
     // Update is called once per frame
@@ -70,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         {
             hp1.SetActive(false);
         }
-        if (currentHealth == 1)
+        else if (currentHealth == 1)
         {
             hp2.SetActive(false);
         }
@@ -80,10 +97,27 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void ActivateGameObjects()
+    void LoadPlayerHealth()
     {
-        Debug.Log("Activating GameObjects");
-        //hp1.SetActive(true);
-        //hp2.SetActive(true);
+        // Load the player's health from PlayerPrefs, default to max health if not found
+        currentHealth = PlayerPrefs.GetInt("Health", maxHealth);
     }
+
+    bool IsInTargetScene()
+    {
+        // Get the current scene's build index
+        int currentSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Check if the current scene's build index matches the target scene build index
+        return currentSceneBuildIndex == targetSceneBuildIndex;
+    }
+
+    public void ResetPlayerHealth()
+    {
+        currentHealth = maxHealth; // Reset to the maximum health value
+        PlayerPrefs.SetInt("Health", currentHealth);
+        PlayerPrefs.Save();
+    }
+
+
 }

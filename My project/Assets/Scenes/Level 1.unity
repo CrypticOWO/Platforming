@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4048c7e498a71d4ab255b1882a2ef46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 7429309196867368631, guid: d3d62ed3512bb4b49a87cea258b92449, type: 3}
+  player: {fileID: 7429309196867368631, guid: d3d62ed3512bb4b49a87cea258b92449, type: 3}
   hp1: {fileID: 6339708609494271005, guid: da41582b1eb676043bf1d4f8fe54bb81, type: 3}
   hp2: {fileID: 7098498278249902253, guid: 712fc2e6ceeb7ce42b2fd56f690b3007, type: 3}
 --- !u!1 &603742252

@@ -6,13 +6,14 @@ using UnityEngine.SceneManagement;
 public class Retry : MonoBehaviour
 {
     public PlayerMovement player;
+    public int currentHealth;
 
     public void ResetTheGame()
     {
         SceneManager.LoadScene("Level 1");
 
         Debug.Log("Balls");
-        player.currentHealth = 3;
-        player.ActivateGameObjects();
+        currentHealth = PlayerPrefs.GetInt("Health", 3);
+        PlayerMovement.instance.ResetPlayerHealth();
     }
 }
