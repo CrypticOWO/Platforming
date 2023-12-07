@@ -12,8 +12,6 @@ public class Retry : MonoBehaviour
     {
         SceneManager.LoadScene("Level 1");
 
-        Debug.Log("Balls");
-        currentHealth = PlayerPrefs.GetInt("Health", 3);
         PlayerMovement.instance.ResetPlayerHealth();
     }
 }

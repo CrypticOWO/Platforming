@@ -27,14 +27,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        // Check if the current scene is the target scene
+    // Check if the current scene is the target scene
         if (IsInTargetScene())
         {
-            Debug.Log("Hello");
-        }
-        else   
-        {
-            Debug.Log("Fuck you");
             hp1.SetActive(true);
             hp2.SetActive(true);
             maxHealth = 3;
@@ -62,6 +57,12 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(new Vector2(rb.velocity.x, jump));
             isGrounded = false;
+        }
+        if (transform.position.y < -7)
+        {
+            TakeDamage();
+            TakeDamage();
+            TakeDamage();
         }
     }
 

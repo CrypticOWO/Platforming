@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemies : MonoBehaviour
+public class MovingPlatform : MonoBehaviour
 {
     //Variables
     public float speed;
@@ -13,7 +13,7 @@ public class Enemies : MonoBehaviour
     void Start()
     {
         left = true;
-        speed = 0.011f;
+        speed = 0.015f;
     }
 
     // Update is called once per frame
@@ -23,26 +23,9 @@ public class Enemies : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x - speed, transform.position.y);
         }
-        else
+        if (transform.position.x < -10)
         {
-            transform.position = new Vector2(transform.position.x + speed, transform.position.y);
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.tag == "Player")
-        {
-            Debug.Log("Hit");
             Destroy(gameObject);
-        }
-        if (coll.tag == "Wall" && left == true)
-        {
-            left = false;
-        }
-        else if (coll.tag == "Wall" && left == false)
-        {
-            left = true;
         }
     }
 }
